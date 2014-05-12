@@ -56,7 +56,7 @@ using namespace Calligra::Sheets;
 */
 
 K_PLUGIN_FACTORY(CSVImportFactory, registerPlugin<CSVFilter>();)
-K_EXPORT_PLUGIN(CSVImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(CSVImportFactory("calligrafilters"), CSVImportFactory)
 
 CSVFilter::CSVFilter(QObject* parent, const QVariantList&) :
         KoFilter(parent)

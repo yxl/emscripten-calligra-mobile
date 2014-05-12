@@ -38,7 +38,7 @@ set(msooxml_LIB_SRCS
     KoOdfExporter.cpp
 )
 
-kde4_add_library(msooxml SHARED ${msooxml_LIB_SRCS})
+kde4_add_library(msooxml ${LIBRARY_TYPE} ${msooxml_LIB_SRCS})
 
 target_link_libraries(msooxml koodf komain)
 if(QCA2_FOUND)

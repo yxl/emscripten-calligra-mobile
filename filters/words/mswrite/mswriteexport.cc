@@ -50,7 +50,7 @@
 #include "mswriteexport.h"
 
 K_PLUGIN_FACTORY(MSWriteExportFactory, registerPlugin<MSWriteExport>();)
-K_EXPORT_PLUGIN(MSWriteExportFactory("wordsmswriteexport", "calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(MSWriteExportFactory("wordsmswriteexport", "calligrafilters"), MSWriteExportFactory)
 
 
 class WRIDevice : public MSWrite::Device

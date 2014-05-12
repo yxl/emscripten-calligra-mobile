@@ -31,7 +31,7 @@ set(textlayout_LIB_SRCS
 )
 
 
-kde4_add_library(textlayout SHARED ${textlayout_LIB_SRCS})
+kde4_add_library(textlayout ${LIBRARY_TYPE} ${textlayout_LIB_SRCS})
 
 target_link_libraries(textlayout kotext)
 target_link_libraries(textlayout LINK_INTERFACE_LIBRARIES kotext)

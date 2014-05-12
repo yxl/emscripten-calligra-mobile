@@ -41,7 +41,7 @@
 #include <KWEFBaseWorker.h>
 
 K_PLUGIN_FACTORY(DocBookExportFactory, registerPlugin<DocBookExport>();)
-K_EXPORT_PLUGIN(DocBookExportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(DocBookExportFactory("calligrafilters"), DocBookExportFactory)
 
 DocBookExport::DocBookExport(QObject *parent, const QVariantList &) : KoFilter(parent)
 {

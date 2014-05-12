@@ -14,7 +14,7 @@ set(kokross_LIB_SRCS
     KoScriptingPart.cpp
     KoScriptingOdf.cpp
 )
-kde4_add_library(kokross SHARED ${kokross_LIB_SRCS})
+kde4_add_library(kokross ${LIBRARY_TYPE} ${kokross_LIB_SRCS})
 
 target_link_libraries(kokross
     komain

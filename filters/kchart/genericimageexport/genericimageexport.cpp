@@ -35,7 +35,7 @@
 
 
 K_PLUGIN_FACTORY(GenericImageExportFactory, registerPlugin<GenericImageExport>();)
-K_EXPORT_PLUGIN(GenericImageExportFactory("genericimageexport"))
+K_EXPORT_STATIC_PLUGIN(GenericImageExportFactory("genericimageexport"), GenericImageExportFactory)
 
 
 GenericImageExport::GenericImageExport(QObject* parent, const QVariantList&)

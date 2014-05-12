@@ -34,7 +34,7 @@
 #include <kshell.h>
 
 K_PLUGIN_FACTORY(GenericFilterFactory, registerPlugin<GenericFilter>();)
-K_EXPORT_PLUGIN(GenericFilterFactory())
+K_EXPORT_STATIC_PLUGIN(GenericFilterFactory(), GenericFilterFactory)
 
 
 GenericFilter::GenericFilter(QObject *parent, const QVariantList&) :

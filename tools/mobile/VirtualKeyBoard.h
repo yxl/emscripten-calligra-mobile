@@ -40,7 +40,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QTextStream>
-#include <QThread>
+//#include <QThread>
 #include <klocale.h>
 
 #include "VirtualKeyBoardLanguageDownloader.h"

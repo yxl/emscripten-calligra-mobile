@@ -50,7 +50,7 @@
 using namespace KChart;
 
 K_PLUGIN_FACTORY(ChartShapePluginFactory, registerPlugin<ChartShapePlugin>();)
-K_EXPORT_PLUGIN(ChartShapePluginFactory("ChartShape"))
+K_EXPORT_STATIC_PLUGIN(ChartShapePluginFactory("ChartShape"), ChartShapePluginFactory)
 
 ChartShapePlugin::ChartShapePlugin(QObject * parent, const QVariantList&)
 {

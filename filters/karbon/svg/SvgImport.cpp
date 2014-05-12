@@ -43,7 +43,7 @@
 #include <QFileInfo>
 
 K_PLUGIN_FACTORY(SvgImportFactory, registerPlugin<SvgImport>();)
-K_EXPORT_PLUGIN(SvgImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(SvgImportFactory("calligrafilters"), SvgImportFactory)
 
 
 SvgImport::SvgImport(QObject*parent, const QVariantList&)

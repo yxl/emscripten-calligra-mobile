@@ -38,7 +38,7 @@ using namespace Calligra::Sheets::Plugins;
 
 // make the plugin available
 K_PLUGIN_FACTORY(SolverFactory, registerPlugin<Calligra::Sheets::Plugins::Solver>();)
-K_EXPORT_PLUGIN(SolverFactory("kspreadsolver"))
+K_EXPORT_STATIC_PLUGIN(SolverFactory("kspreadsolver"), SolverFactory)
 
 Calligra::Sheets::View* s_view = 0;
 Calligra::Sheets::Formula* s_formula = 0;

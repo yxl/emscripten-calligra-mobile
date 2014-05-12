@@ -10,7 +10,7 @@ if(OPENEXR_FOUND)
     add_definitions(${OPENEXR_DEFINITIONS})
 endif(OPENEXR_FOUND)
 
-add_subdirectory(tests)
+#add_subdirectory(tests)
 add_subdirectory(benchmarks)
 
 set(pigmentcms_SRCS
@@ -92,7 +92,7 @@ if(MSVC)
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /NODEFAULTLIB:LIBC.LIB")
 endif(MSVC)
 
-kde4_add_library(pigmentcms SHARED ${pigmentcms_SRCS})
+kde4_add_library(pigmentcms ${LIBRARY_TYPE} ${pigmentcms_SRCS})
 
 target_link_libraries(
     pigmentcms

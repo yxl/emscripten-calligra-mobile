@@ -32,7 +32,7 @@
 #include "karbonaiparserbase.h"
 
 K_PLUGIN_FACTORY(AiImportFactory, registerPlugin<AiImport>(); )
-K_EXPORT_PLUGIN(AiImportFactory("karbonaiimport", "calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(AiImportFactory("karbonaiimport", "calligrafilters"), AiImportFactory)
 
 AiImport::AiImport(QObject*parent, const QVariantList&)
         : KoFilter(parent)

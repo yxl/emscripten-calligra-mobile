@@ -31,7 +31,7 @@
 #include <KDebug>
 
 K_PLUGIN_FACTORY(EpsImportFactory, registerPlugin<EpsImport>();)
-K_EXPORT_PLUGIN(EpsImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(EpsImportFactory("calligrafilters"), EpsImportFactory)
 
 EpsImport::EpsImport(QObject*parent, const QVariantList&)
         : KoFilter(parent)

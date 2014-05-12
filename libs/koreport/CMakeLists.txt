@@ -94,7 +94,7 @@ set(koreport_LIB_SRCS
 
 kde4_add_ui_files(koreport_LIB_SRCS wrtembed/detailgroupsectiondialog.ui wrtembed/sectioneditor.ui )
 
-kde4_add_library(koreport SHARED ${koreport_LIB_SRCS})
+kde4_add_library(koreport ${LIBRARY_TYPE} ${koreport_LIB_SRCS})
 
 target_link_libraries(koreport
   ${KOPROPERTY_LIBS} ${KDE4_KROSSCORE_LIBS} komain)

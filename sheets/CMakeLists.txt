@@ -139,7 +139,7 @@ SET (part_DIR_SRCS
     part/Headers.cpp
     part/HeaderWidgets.cpp
     part/HeaderItems.cpp
-    part/PrintJob.cpp
+#    part/PrintJob.cpp
     part/ToolRegistry.cpp
     part/TabBar.cpp
     part/View.cpp
@@ -262,7 +262,7 @@ set (calligrasheetsodf_LIB_SRCS
     )
 
 
-kde4_add_library(calligrasheetsodf SHARED ${calligrasheetsodf_LIB_SRCS})
+kde4_add_library(calligrasheetsodf ${LIBRARY_TYPE} ${calligrasheetsodf_LIB_SRCS})
 
 target_link_libraries(calligrasheetsodf komain)
 target_link_libraries(calligrasheetsodf LINK_INTERFACE_LIBRARIES komain)
@@ -273,7 +273,7 @@ set_target_properties(calligrasheetsodf PROPERTIES
 install(TARGETS calligrasheetsodf ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 
-kde4_add_library(calligrasheetscommon SHARED ${calligrasheetscommon_LIB_SRCS})
+kde4_add_library(calligrasheetscommon ${LIBRARY_TYPE} ${calligrasheetscommon_LIB_SRCS})
 
 target_link_libraries(calligrasheetscommon
     komain
@@ -314,19 +314,26 @@ SET (calligrasheets_KDEINIT_SRCS part/Main.cpp )
 
 kde4_add_app_icon(calligrasheets_KDEINIT_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/data/pics/hi*-app-kspread.png")
 
-kde4_add_kdeinit_executable( calligrasheets ${calligrasheets_KDEINIT_SRCS})
+if (EMSCRIPTEN)
+  configure_file(${KDE4_MODULE_DIR}/kde4init_dummy.cpp.in ${CMAKE_CURRENT_BINARY_DIR}/calligrasheets_dummy.cpp)
+  list(APPEND calligrasheets_KDEINIT_SRCS ${CMAKE_CURRENT_BINARY_DIR}/calligrasheets_dummy.cpp)
+  kde4_add_executable(calligrasheets ${calligrasheets_KDEINIT_SRCS})
+  target_link_libraries(calligrasheets komain ${QT_QTCORE_LIBRARY})
+else()
+  kde4_add_kdeinit_executable(calligrasheets ${calligrasheets_KDEINIT_SRCS})
 
-if (Q_WS_MAC)
-set_target_properties(calligrasheets PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.template)
-set_target_properties(calligrasheets PROPERTIES MACOSX_BUNDLE_GUI_IDENTIFIER "org.calligra.sheets")
-set_target_properties(calligrasheets PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "Calligra Sheets 2")
-endif (Q_WS_MAC)
+  if (Q_WS_MAC)
+  set_target_properties(calligrasheets PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.template)
+  set_target_properties(calligrasheets PROPERTIES MACOSX_BUNDLE_GUI_IDENTIFIER "org.calligra.sheets")
+  set_target_properties(calligrasheets PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "Calligra Sheets 2")
+  endif (Q_WS_MAC)
 
-target_link_libraries(kdeinit_calligrasheets komain )
+  target_link_libraries(kdeinit_calligrasheets komain )
 
-install(TARGETS kdeinit_calligrasheets  ${INSTALL_TARGETS_DEFAULT_ARGS})
+  install(TARGETS kdeinit_calligrasheets  ${INSTALL_TARGETS_DEFAULT_ARGS})
+  target_link_libraries( calligrasheets kdeinit_calligrasheets )
+endif()
 
-target_link_libraries( calligrasheets kdeinit_calligrasheets )
 install(TARGETS calligrasheets  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############

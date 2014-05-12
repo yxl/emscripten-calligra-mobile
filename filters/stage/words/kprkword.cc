@@ -36,7 +36,7 @@
 
 
 K_PLUGIN_FACTORY(KprWordsFactory, registerPlugin<KprWords>();)
-K_EXPORT_PLUGIN(KprWordsFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(KprWordsFactory("calligrafilters"), KprWordsFactory)
 
 KprWords::KprWords(QObject *parent, const QStringList&) :
         KoFilter(parent),

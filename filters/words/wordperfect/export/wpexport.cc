@@ -35,7 +35,7 @@
 #include <wp6.h>
 
 K_PLUGIN_FACTORY(WPExportFactory, registerPlugin<WPExport>();)
-K_EXPORT_PLUGIN(WPExportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(WPExportFactory("calligrafilters"), WPExportFactory)
 
 WPExport::WPExport(QObject* parent, const QVariantList&):
         KoFilter(parent)

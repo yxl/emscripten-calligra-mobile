@@ -39,7 +39,7 @@
 #include "pole.h"
 
 K_PLUGIN_FACTORY(HancomWordImportFactory, registerPlugin<HancomWordImport>();)
-K_EXPORT_PLUGIN(HancomWordImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(HancomWordImportFactory("calligrafilters"), HancomWordImportFactory)
 
 class HancomWordImport::Private
 {

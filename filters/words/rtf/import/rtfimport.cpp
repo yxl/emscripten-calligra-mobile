@@ -27,7 +27,7 @@
 #include <QTextDocumentWriter>
 
 K_PLUGIN_FACTORY(RTFImportFactory, registerPlugin<RTFImport>();)
-K_EXPORT_PLUGIN(RTFImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(RTFImportFactory("calligrafilters"), RTFImportFactory)
 
 RTFImport::RTFImport(QObject* parent, const QVariantList&)
     : KoFilter(parent)

@@ -26,7 +26,7 @@
 #include <QScrollArea>
 #include <KoPAPageBase.h>
 #include <KoDocument.h>
-#include <QThread>
+//#include <QThread>
 
 #include "FlowLayout.h"
 #include "PreviewButton.h"

@@ -30,7 +30,7 @@ using namespace Calligra::Sheets;
 K_PLUGIN_FACTORY(CalendarToolPluginFactory,
                  registerPlugin<CalendarToolFactory>();
                 )
-K_EXPORT_PLUGIN(CalendarToolPluginFactory("CalendarTool"))
+K_EXPORT_STATIC_PLUGIN(CalendarToolPluginFactory("CalendarTool"), CalendarToolPluginFactory)
 
 
 CalendarToolFactory::CalendarToolFactory(QObject *, const QVariantList&)

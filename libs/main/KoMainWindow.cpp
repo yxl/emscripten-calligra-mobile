@@ -1319,7 +1319,7 @@ void KoMainWindow::slotFilePrintPreview()
     KoPrintJob *printJob = rootView()->createPrintJob();
     if (printJob == 0)
         return;
-
+#ifndef EMSCRIPTEN
   /* Sets the startPrinting() slot to be blocking.
      The Qt print-preview dialog requires the printing to be completely blocking
      and only return when the full document has been printed.
@@ -1331,6 +1331,7 @@ void KoMainWindow::slotFilePrintPreview()
     connect(preview, SIGNAL(paintRequested(QPrinter*)), printJob, SLOT(startPrinting()));
     preview->exec();
     delete preview;
+#endif
 }
 
 class ExportPdfDialog : public KPageDialog

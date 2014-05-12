@@ -32,7 +32,7 @@ DESCRIPTION
 #include <q3pointarray.h>
 
 K_PLUGIN_FACTORY(MSODImportFactory, registerPlugin<MSODImport>();)
-K_EXPORT_PLUGIN(MSODImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(MSODImportFactory("calligrafilters"), MSODImportFactory)
 
 const int MSODImport::s_area = 30505;
 

@@ -2,6 +2,27 @@ project(calligra)
 
 cmake_minimum_required(VERSION 2.6.2 FATAL_ERROR)
 
+################### For Emscripten ########################
+# the name of the target operating system
+SET(EMSCRIPTEN 1)
+
+set(KDE4_INSTALL  $ENV{HOME}/kde4/install)
+add_definitions("-DEMSCRIPTEN")
+
+SET(CMAKE_FIND_ROOT_PATH ${KDE4_INSTALL})
+# FindQt4.cmake querys qmake to get information, this doesn't work when crosscompiling
+set(QT_BINARY_DIR   ${KDE4_INSTALL}/bin)
+set(QT_LIBRARY_DIR  ${KDE4_INSTALL}/lib)
+set(QT_HEADERS_DIR  ${KDE4_INSTALL}/include)
+set(QT_QTCORE_LIBRARY   ${KDE4_INSTALL}/lib/QtCore.a)
+set(QT_QTCORE_INCLUDE_DIR ${KDE4_INSTALL}/include/QtCore)
+set(QT_MKSPECS_DIR  ${KDE4_INSTALL}/mkspecs)
+set(QT_MOC_EXECUTABLE  ${KDE4_INSTALL}/bin/moc)
+set(QT_QMAKE_EXECUTABLE  ${KDE4_INSTALL}/bin/qmake)
+set(QT_UIC_EXECUTABLE  ${KDE4_INSTALL}/bin/uic)
+set(QT_DBUSXML2CPP_EXECUTABLE ${KDE4_INSTALL}/bin/qdbusxml2cpp)
+set(QT_DBUSCPP2XML_EXECUTABLE ${KDE4_INSTALL}/bin/qdbuscpp2xml)
+
  ############
 #############
 ## Options ##
@@ -31,13 +52,32 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
 option(BUILD_koabstraction "Build directory koabstraction" ON) # koabstraction isn't buildable at the moment
 option(BUILD_mobile "Build directory mobile" ON) # mobile depends on koabstraction it builds but does not run
 
-option(GHNS "support Get Hot New Stuff" ON)
-option(NEPOMUK "support NEPOMUK Tagging" ON)
+option(GHNS "support Get Hot New Stuff" OFF)
+option(NEPOMUK "support NEPOMUK Tagging" OFF)
 option(TINY "compile a tiny Calligra" OFF)
 option(CREATIVEONLY "compile only Karbon and Krita" OFF)
-option(QT3SUPPORT "Build the parts of Calligra that still depend on Qt3" ON)
+option(QT3SUPPORT "Build the parts of Calligra that still depend on Qt3" OFF)
 
-IF (TINY)
+IF (EMSCRIPTEN)
+    set(SHOULD_BUILD_WORDS TRUE)
+    set(SHOULD_BUILD_STAGE TRUE)
+    set(SHOULD_BUILD_SHEETS TRUE)
+    set(SHOULD_BUILD_KARBON FALSE)
+    set(SHOULD_BUILD_KRITA FALSE)
+    set(SHOULD_BUILD_KEXI FALSE)
+    set(SHOULD_BUILD_FLOW FALSE)
+    set(SHOULD_BUILD_PLAN FALSE)
+    set(SHOULD_BUILD_KDGANTT FALSE)
+    set(SHOULD_BUILD_KOUNAVAIL FALSE)
+    set(SHOULD_BUILD_SCRIPTING FALSE)
+    set(SHOULD_BUILD_MOBILE TRUE)
+    set(SHOULD_BUILD_KOREPORT FALSE)
+    set(SHOULD_BUILD_BRAINDUMP FALSE)
+    set(SHOULD_BUILD_CALLIGRA FALSE)
+    set(SHOULD_BUILD_CSTESTER FALSE)
+    set(SHOULD_BUILD_KOABSTRACTION TRUE)
+    set(SHOULD_BUILD_ACTIVE FALSE)
+ELSEIF (TINY)
     set(SHOULD_BUILD_WORDS TRUE)
     set(SHOULD_BUILD_STAGE TRUE)
     set(SHOULD_BUILD_SHEETS TRUE)
@@ -645,7 +685,9 @@ else(SHOULD_BUILD_SHEETS AND SHOULD_BUILD_WORDS)
     set(SHOULD_BUILD_CSTESTER FALSE)
 endif(SHOULD_BUILD_SHEETS AND SHOULD_BUILD_WORDS)
 
-macro_optional_add_subdirectory(doc)
+if(NOT EMSCRIPTEN)
+  macro_optional_add_subdirectory(doc)
+endif(NOT EMSCRIPTEN)
 
 # non-app directories are moved here because they can depend on SHOULD_BUILD_{appname} variables set above
 add_subdirectory(libs)

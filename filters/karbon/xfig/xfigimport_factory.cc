@@ -29,5 +29,5 @@ DESCRIPTION
 #include <kdebug.h>
 
 K_PLUGIN_FACTORY(XFIGImportFactory, registerPlugin<XFIGImport>();)
-K_EXPORT_PLUGIN(XFIGImportFactory("xfigimport"))
+K_EXPORT_STATIC_PLUGIN(XFIGImportFactory("xfigimport"), XFIGImportFactory)
 

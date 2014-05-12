@@ -42,7 +42,7 @@ const unsigned XcfExport::m_tileHeight = 64;
 
 
 K_PLUGIN_FACTORY(XcfExportFactory, registerPlugin<XcfExport>();)
-K_EXPORT_PLUGIN(XcfExportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(XcfExportFactory("calligrafilters"), XcfExportFactory)
 
 
 XcfExport::XcfExport(QObject*parent, const QVariantList&)

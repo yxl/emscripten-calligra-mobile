@@ -28,7 +28,7 @@
 #include <kpluginfactory.h>
 
 K_PLUGIN_FACTORY(TextPluginFactory, registerPlugin<TextPlugin>();)
-K_EXPORT_PLUGIN(TextPluginFactory("TextShape"))
+K_EXPORT_STATIC_PLUGIN(TextPluginFactory("TextShape"), TextPluginFactory)
 
 TextPlugin::TextPlugin(QObject * parent, const QVariantList &)
         : QObject(parent)

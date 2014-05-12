@@ -126,7 +126,7 @@ set( calligrastageprivate_LIB_SRCS
      ui/KPrConfigureSlideShowDialog.cpp
      ui/KPrConfigurePresenterViewDialog.cpp
      ui/KPrPresentationToolWidget.cpp
-     ui/KPrHtmlExportDialog.cpp
+#     ui/KPrHtmlExportDialog.cpp
 
      tools/KPrPlaceholderTool.cpp
      tools/KPrPlaceholderToolFactory.cpp
@@ -139,7 +139,7 @@ kde4_add_ui_files(calligrastageprivate_LIB_SRCS
      ui/KPrHtmlExport.ui
    )
 
-kde4_add_library(calligrastageprivate SHARED ${calligrastageprivate_LIB_SRCS})
+kde4_add_library(calligrastageprivate ${LIBRARY_TYPE} ${calligrastageprivate_LIB_SRCS})
 
 target_link_libraries(calligrastageprivate kopageapp kowidgets textlayout ${KDE4_PHONON_LIBRARY} ${QT_QTOPENGL_LIBRARY} ${QT_QTWEBKIT_LIBRARY})
 target_link_libraries(calligrastageprivate LINK_INTERFACE_LIBRARIES kopageapp)
@@ -163,19 +163,25 @@ set(stage_KDEINIT_SRCS main.cpp )
 
 kde4_add_app_icon(stage_KDEINIT_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../pics/hi*-app-stage.png")
 
-kde4_add_kdeinit_executable(calligrastage ${stage_KDEINIT_SRCS})
+if (EMSCRIPTEN)
+  configure_file(${KDE4_MODULE_DIR}/kde4init_dummy.cpp.in ${CMAKE_CURRENT_BINARY_DIR}/stage_dummy.cpp)
+  list(APPEND stage_KDEINIT_SRCS ${CMAKE_CURRENT_BINARY_DIR}/stage_dummy.cpp)
+  kde4_add_executable(calligrastage ${stage_KDEINIT_SRCS})
+  target_link_libraries(calligrastage komain ${QT_QTCORE_LIBRARY})
+else()
+  kde4_add_kdeinit_executable(calligrastage ${stage_KDEINIT_SRCS})
+  if (Q_WS_MAC)
+     set_target_properties(calligrastage PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.template)
+     set_target_properties(calligrastage PROPERTIES MACOSX_BUNDLE_GUI_IDENTIFIER "org.calligra.stage")
+     set_target_properties(calligrastage PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "Calligra Stage 2")
+  endif (Q_WS_MAC)
 
-if (Q_WS_MAC)
-   set_target_properties(calligrastage PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.template)
-   set_target_properties(calligrastage PROPERTIES MACOSX_BUNDLE_GUI_IDENTIFIER "org.calligra.stage")
-   set_target_properties(calligrastage PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "Calligra Stage 2")
-endif (Q_WS_MAC)
+  target_link_libraries(kdeinit_calligrastage komain )
 
-target_link_libraries(kdeinit_calligrastage komain )
+  install(TARGETS kdeinit_calligrastage ${INSTALL_TARGETS_DEFAULT_ARGS})
+  target_link_libraries(calligrastage kdeinit_calligrastage)
+endif()
 
-install(TARGETS kdeinit_calligrastage ${INSTALL_TARGETS_DEFAULT_ARGS})
-
-target_link_libraries(calligrastage kdeinit_calligrastage)
 install(TARGETS calligrastage ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ### desktop files ###

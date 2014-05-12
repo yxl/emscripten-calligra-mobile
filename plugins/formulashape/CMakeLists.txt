@@ -48,7 +48,7 @@ set( kformulalib_PART_SRCS
    elements/UnknownElement.cpp
 )
 
-kde4_add_library(kformulalib SHARED ${kformulalib_PART_SRCS})
+kde4_add_library(kformulalib ${LIBRARY_TYPE} ${kformulalib_PART_SRCS})
 
 target_link_libraries(kformulalib komain)
 target_link_libraries(kformulalib LINK_INTERFACE_LIBRARIES komain)

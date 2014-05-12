@@ -30,7 +30,7 @@
 #include "lateximportdia.h"
 
 K_PLUGIN_FACTORY(LATEXImportFactory, registerPlugin<LATEXImport>();)
-K_EXPORT_PLUGIN(LATEXImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(LATEXImportFactory("calligrafilters"), LATEXImportFactory)
 
 
 LATEXImport::LATEXImport(KoFilter *, const QVariantList&) :

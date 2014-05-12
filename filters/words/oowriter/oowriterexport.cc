@@ -42,7 +42,7 @@
 #include <QByteArray>
 
 K_PLUGIN_FACTORY(OOWRITERExportFactory, registerPlugin<OOWRITERExport>();)
-K_EXPORT_PLUGIN(OOWRITERExportFactory("wordsoowriterexport", "calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(OOWRITERExportFactory("wordsoowriterexport", "calligrafilters"), OOWRITERExportFactory)
 
 OOWRITERExport::OOWRITERExport(QObject* parent , const QVariantList &) :
         KoFilter(parent)

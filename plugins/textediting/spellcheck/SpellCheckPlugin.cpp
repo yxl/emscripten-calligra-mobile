@@ -26,7 +26,7 @@
 #include <KoTextEditingRegistry.h>
 
 K_PLUGIN_FACTORY(SpellCheckPluginFactory, registerPlugin<SpellCheckPlugin>();)
-K_EXPORT_PLUGIN(SpellCheckPluginFactory("SpellCheckPlugin"))
+K_EXPORT_STATIC_PLUGIN(SpellCheckPluginFactory("SpellCheckPlugin"), SpellCheckPluginFactory)
 
 SpellCheckPlugin::SpellCheckPlugin(QObject *parent, const QVariantList&)
     : QObject(parent)

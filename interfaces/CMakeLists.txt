@@ -8,7 +8,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/kchart/ ${KOMAIN_INCLUDES} )
 set(kochart_LIB_SRCS koChart.cc)
 
 
-kde4_add_library(kochart SHARED ${kochart_LIB_SRCS})
+kde4_add_library(kochart ${LIBRARY_TYPE} ${kochart_LIB_SRCS})
 
 target_link_libraries(kochart komain )
 

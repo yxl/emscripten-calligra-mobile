@@ -39,7 +39,7 @@
 #define DPI 90
 
 K_PLUGIN_FACTORY(KontourImportFactory, registerPlugin<KontourImport>();)
-K_EXPORT_PLUGIN(KontourImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(KontourImportFactory("calligrafilters"), KontourImportFactory)
 
 KontourImport::KontourImport(QObject *parent, const QVariantList&) :
         KoFilter(parent),

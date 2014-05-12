@@ -118,7 +118,7 @@ if( Soprano_FOUND )
     )
 endif( Soprano_FOUND )
 
-kde4_add_library(kotext SHARED ${kotext_LIB_SRCS})
+kde4_add_library(kotext ${LIBRARY_TYPE} ${kotext_LIB_SRCS})
 
 target_link_libraries(kotext flake)
 if( Soprano_FOUND )

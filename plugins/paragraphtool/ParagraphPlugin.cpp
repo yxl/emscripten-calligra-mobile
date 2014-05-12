@@ -24,7 +24,7 @@
 #include <kpluginfactory.h>
 
 K_PLUGIN_FACTORY(ParagraphPluginFactory, registerPlugin<ParagraphPlugin>();)
-K_EXPORT_PLUGIN(ParagraphPluginFactory("ParagraphTool"))
+K_EXPORT_STATIC_PLUGIN(ParagraphPluginFactory("ParagraphTool"), ParagraphPluginFactory)
 
 ParagraphPlugin::ParagraphPlugin(QObject * parent, const QVariantList &)
         : QObject(parent)

@@ -25,7 +25,7 @@ set(wordsexportfilters_LIB_SRCS
     PictureShared.cpp
 )
 
-kde4_add_library(wordsexportfilters SHARED ${wordsexportfilters_LIB_SRCS})
+kde4_add_library(wordsexportfilters ${LIBRARY_TYPE} ${wordsexportfilters_LIB_SRCS})
 
 target_link_libraries(wordsexportfilters komain)
 target_link_libraries(wordsexportfilters LINK_INTERFACE_LIBRARIES komain)

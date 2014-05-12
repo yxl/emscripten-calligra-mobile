@@ -7,8 +7,11 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/sheets # for PointStorage.h
 )
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+
 kde4_add_executable(recordsxml2cpp recordsxml2cpp.cpp)
-target_link_libraries(recordsxml2cpp ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY})
+target_link_libraries(recordsxml2cpp ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY} ${GTK3_LIBRARIES} dl)
 
 add_custom_command(
     OUTPUT records.cpp

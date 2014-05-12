@@ -100,7 +100,7 @@ if( Soprano_FOUND )
 endif( Soprano_FOUND )
 
 
-kde4_add_library(wordsprivate SHARED ${wordsprivate_LIB_SRCS})
+kde4_add_library(wordsprivate ${LIBRARY_TYPE} ${wordsprivate_LIB_SRCS})
 
 target_link_libraries(wordsprivate komain textlayout)
 if( Soprano_FOUND )
@@ -122,7 +122,7 @@ kde4_add_plugin(wordspart ${wordspart_PART_SRCS})
 
 
 
-target_link_libraries(wordspart ${KDE4_KDECORE_LIBS} ${KDE4_KPARTS_LIBS} wordsprivate )
+target_link_libraries(wordspart ${KDE4_KDECORE_LIBS} ${KDE4_KPARTS_LIBS} wordsprivate)
 
 install(TARGETS wordspart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
@@ -133,19 +133,26 @@ set(words_KDEINIT_SRCS main.cpp )
 
 kde4_add_app_icon(words_KDEINIT_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../pics/hi*-app-words.png")
 
-kde4_add_kdeinit_executable( calligrawords ${words_KDEINIT_SRCS})
+if (EMSCRIPTEN)
+  configure_file(${KDE4_MODULE_DIR}/kde4init_dummy.cpp.in ${CMAKE_CURRENT_BINARY_DIR}/words_dummy.cpp)
+  list(APPEND words_KDEINIT_SRCS ${CMAKE_CURRENT_BINARY_DIR}/words_dummy.cpp)
+  kde4_add_executable(calligrawords ${words_KDEINIT_SRCS})
+  target_link_libraries(calligrawords  ${KDE4_KDEUI_LIBS} komain ${QT_QTCORE_LIBRARY})
+else()
+  kde4_add_kdeinit_executable( calligrawords ${words_KDEINIT_SRCS})
+  if (Q_WS_MAC)
+     set_target_properties(calligrawords PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.template)
+     set_target_properties(calligrawords PROPERTIES MACOSX_BUNDLE_GUI_IDENTIFIER "org.calligra.words")
+     set_target_properties(calligrawords PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "Words")
+  endif (Q_WS_MAC)
 
-if (Q_WS_MAC)
-   set_target_properties(calligrawords PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.template)
-   set_target_properties(calligrawords PROPERTIES MACOSX_BUNDLE_GUI_IDENTIFIER "org.calligra.words")
-   set_target_properties(calligrawords PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "Words")
-endif (Q_WS_MAC)
+  target_link_libraries(kdeinit_calligrawords ${KDE4_KDEUI_LIBS} komain)
 
-target_link_libraries(kdeinit_calligrawords  ${KDE4_KDEUI_LIBS} komain )
+  install(TARGETS kdeinit_calligrawords  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-install(TARGETS kdeinit_calligrawords  ${INSTALL_TARGETS_DEFAULT_ARGS})
+  target_link_libraries( calligrawords kdeinit_calligrawords )
+endif()
 
-target_link_libraries( calligrawords kdeinit_calligrawords )
 install(TARGETS calligrawords  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############

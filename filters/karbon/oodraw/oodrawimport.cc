@@ -50,7 +50,7 @@
 #include <core/vgroup.h>
 
 K_PLUGIN_FACTORY(OoDrawImportFactory, registerPlugin<OoDrawImport>();)
-K_EXPORT_PLUGIN(OoDrawImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(OoDrawImportFactory("calligrafilters"), OoDrawImportFactory)
 
 
 OoDrawImport::OoDrawImport(QObject *parent, const QVariantList &)

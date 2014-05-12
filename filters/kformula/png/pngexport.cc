@@ -38,7 +38,7 @@
 
 
 K_PLUGIN_FACTORY(PNGExportFactory, registerPlugin<PNGExport>();)
-K_EXPORT_PLUGIN(PNGExportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(PNGExportFactory("calligrafilters"), PNGExportFactory)
 
 
 PNGExport::PNGExport(QObject* parent, const QVariantList&)

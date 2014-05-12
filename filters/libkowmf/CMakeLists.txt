@@ -28,7 +28,7 @@ set(libwmf_LIB_SRCS
    WmfWriter.cpp
  )
 
-kde4_add_library(libwmf SHARED ${libwmf_LIB_SRCS})
+kde4_add_library(libwmf ${LIBRARY_TYPE} ${libwmf_LIB_SRCS})
 
 target_link_libraries(libwmf  ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY})
 

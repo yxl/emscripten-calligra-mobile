@@ -54,7 +54,7 @@
 
 
 K_PLUGIN_FACTORY(MSWriteImportFactory, registerPlugin<MSWriteImport>();)
-K_EXPORT_PLUGIN(MSWriteImportFactory("wordsmswriteimport"))
+K_EXPORT_STATIC_PLUGIN(MSWriteImportFactory("wordsmswriteimport"), MSWriteImportFactory)
 
 
 //

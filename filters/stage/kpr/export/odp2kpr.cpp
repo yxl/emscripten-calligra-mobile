@@ -38,7 +38,7 @@
 
 
 K_PLUGIN_FACTORY(Odp2KprFactory, registerPlugin<Odp2Kpr>();)
-K_EXPORT_PLUGIN(Odp2KprFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(Odp2KprFactory("calligrafilters"), Odp2KprFactory)
 
 Odp2Kpr::Odp2Kpr(QObject *parent, const QStringList&) :
         KoFilter(parent)

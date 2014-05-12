@@ -30,7 +30,7 @@
 #include <KDebug>
 
 K_PLUGIN_FACTORY(OOPPTImportFactory, registerPlugin<OOPPTImport>();)
-K_EXPORT_PLUGIN(OOPPTImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(OOPPTImportFactory("calligrafilters"), OOPPTImportFactory)
 
 OOPPTImport::OOPPTImport(QObject*parent, const QVariantList&)
         : KoFilter(parent)

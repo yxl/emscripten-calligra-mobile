@@ -28,7 +28,7 @@
 #include <QByteArray>
 
 K_PLUGIN_FACTORY(XSLTExportFactory, registerPlugin<XSLTExport>();)
-K_EXPORT_PLUGIN(XSLTExportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(XSLTExportFactory("calligrafilters"), XSLTExportFactory)
 
 // Check for XSLT files
 extern "C"

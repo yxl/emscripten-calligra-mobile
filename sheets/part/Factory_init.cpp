@@ -19,5 +19,12 @@
 
 #include "Factory.h"
 
-K_EXPORT_PLUGIN(Calligra::Sheets::Factory)
+namespace Calligra
+{
+namespace Sheets
+{
 
+K_EXPORT_STATIC_PLUGIN(Factory(), Factory)
+
+}
+}

@@ -57,7 +57,7 @@
 #include <abiwordexport.moc>
 
 K_PLUGIN_FACTORY(ABIWORDExportFactory, registerPlugin<ABIWORDExport>();)
-K_EXPORT_PLUGIN(ABIWORDExportFactory("wordsabiwordexport", "calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(ABIWORDExportFactory("wordsabiwordexport", "calligrafilters"), ABIWORDExportFactory)
 
 class StyleMap : public QMap<QString, LayoutData>
 {

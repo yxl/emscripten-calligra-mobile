@@ -43,7 +43,7 @@
 #include <KoOasisSettings.h>
 
 K_PLUGIN_FACTORY(OoImpressImportFactory, registerPlugin<OoImpressImport>();)
-K_EXPORT_PLUGIN(OoImpressImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(OoImpressImportFactory("calligrafilters"), OoImpressImportFactory)
 
 
 OoImpressImport::OoImpressImport(QObject*parent, const QVariantList &)

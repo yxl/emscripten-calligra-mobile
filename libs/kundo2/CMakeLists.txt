@@ -7,7 +7,7 @@ set(kundo2_LIB_SRCS
 	kundo2model.cpp
 )
 
-kde4_add_library(kundo2 SHARED ${kundo2_LIB_SRCS})
+kde4_add_library(kundo2 ${LIBRARY_TYPE} ${kundo2_LIB_SRCS})
 
 target_link_libraries(kundo2 ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
 

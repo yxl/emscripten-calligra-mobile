@@ -29,7 +29,7 @@
 
 
 K_PLUGIN_FACTORY(PluginFactory, registerPlugin<Plugin>();)
-K_EXPORT_PLUGIN(PluginFactory("TreeShape"))
+K_EXPORT_STATIC_PLUGIN(PluginFactory("TreeShape"), PluginFactory)
 
 Plugin::Plugin(QObject *parent, const QVariantList &)
     : QObject(parent)

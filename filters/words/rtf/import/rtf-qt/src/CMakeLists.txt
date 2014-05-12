@@ -45,7 +45,7 @@ set(RtfReader_LIB_SOURCES
 
 qt4_automoc(${RtfReader_LIB_SOURCES})
 
-kde4_add_library(RtfReader SHARED ${RtfReader_LIB_SOURCES})
+kde4_add_library(RtfReader ${LIBRARY_TYPE} ${RtfReader_LIB_SOURCES})
 target_link_libraries(RtfReader ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY}) 
 
 set_target_properties(RtfReader PROPERTIES VERSION ${GENERIC_CALLIGRA_LIB_VERSION} SOVERSION ${GENERIC_CALLIGRA_LIB_SOVERSION} )

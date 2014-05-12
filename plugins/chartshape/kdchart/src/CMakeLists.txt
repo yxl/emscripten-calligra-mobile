@@ -114,7 +114,7 @@ qt4_wrap_ui(kdchart_LIB_SRCS
 
 qt_wrap_cpp(kdchart kdchart_LIB_SRCS KDChartEnums.h)
 
-kde4_add_library(kdchart SHARED ${kdchart_LIB_SRCS})
+kde4_add_library(kdchart ${LIBRARY_TYPE} ${kdchart_LIB_SRCS})
 
 target_link_libraries(kdchart  ${QT_QTSVG_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${ZLIB_LIBRARY} )
 

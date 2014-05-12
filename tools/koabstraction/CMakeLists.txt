@@ -13,7 +13,7 @@ set(koabstraction_LIB_SRCS
     FoCellEditor.cpp #TODO move back to tools/f-office
 )
 
-kde4_add_library(koabstraction SHARED ${koabstraction_LIB_SRCS})
+kde4_add_library(koabstraction ${LIBRARY_TYPE} ${koabstraction_LIB_SRCS})
 
 target_link_libraries(koabstraction ${extra_libs}
     ${QT_LIBRARIES} 

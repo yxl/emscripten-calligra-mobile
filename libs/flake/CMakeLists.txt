@@ -219,7 +219,7 @@ kde4_add_ui_files(flake_SRCS
     tools/KoZoomToolWidget.ui
 )
 
-kde4_add_library(flake SHARED ${flake_SRCS})
+kde4_add_library(flake ${LIBRARY_TYPE} ${flake_SRCS})
 
 target_link_libraries(flake ${KDE4_KDEUI_LIBS} pigmentcms koodf)
 

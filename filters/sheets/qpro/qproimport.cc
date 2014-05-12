@@ -43,7 +43,7 @@
 using namespace Calligra::Sheets;
 
 K_PLUGIN_FACTORY(QPROImportFactory, registerPlugin<QpImport>();)
-K_EXPORT_PLUGIN(QPROImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(QPROImportFactory("calligrafilters"), QPROImportFactory)
 
 // ---------------------------------------------------------------
 

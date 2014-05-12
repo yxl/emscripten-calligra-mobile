@@ -26,7 +26,7 @@
 #include <KoTextEditingRegistry.h>
 
 K_PLUGIN_FACTORY( ThesaurusPluginFactory, registerPlugin<ThesaurusPlugin>(); )
-K_EXPORT_PLUGIN( ThesaurusPluginFactory("ThesaurusPlugin", "thesaurus_tool") )
+K_EXPORT_STATIC_PLUGIN( ThesaurusPluginFactory("ThesaurusPlugin", "thesaurus_tool"), ThesaurusPluginFactory )
 
 ThesaurusPlugin::ThesaurusPlugin(QObject *parent, const QVariantList&)
     : QObject(parent)

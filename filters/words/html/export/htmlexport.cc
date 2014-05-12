@@ -53,7 +53,7 @@
 #include <htmlexport.moc>
 
 K_PLUGIN_FACTORY(HTMLExportFactory, registerPlugin<HTMLExport>();)
-K_EXPORT_PLUGIN(HTMLExportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(HTMLExportFactory("calligrafilters"), HTMLExportFactory)
 
 //
 // HTMLExport

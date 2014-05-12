@@ -58,7 +58,7 @@ set(koproperty_LIB_SRCS
 )
 
 
-kde4_add_library(${KOPROPERTY_TARGETNAME} SHARED ${koproperty_LIB_SRCS})
+kde4_add_library(${KOPROPERTY_TARGETNAME} ${LIBRARY_TYPE} ${koproperty_LIB_SRCS})
 
 set(KOPROPERTY_LINK_LIBS ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS})
 if(KOPROPERTY_USE_KOLIBS)

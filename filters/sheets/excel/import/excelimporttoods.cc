@@ -52,7 +52,7 @@
 #include "ImportUtils.h"
 
 K_PLUGIN_FACTORY(ExcelImportFactory, registerPlugin<ExcelImport>();)
-K_EXPORT_PLUGIN(ExcelImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(ExcelImportFactory("calligrafilters"), ExcelImportFactory)
 
 #define UNICODE_EUR 0x20AC
 #define UNICODE_GBP 0x00A3

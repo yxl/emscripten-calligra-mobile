@@ -51,7 +51,7 @@ kde4_add_ui_files(chartshape_LIB_SRCS
     dialogs/CellRegionDialog.ui
 )
 
-kde4_add_library(chartshapelib SHARED ${chartshape_LIB_SRCS})
+kde4_add_library(chartshapelib ${LIBRARY_TYPE} ${chartshape_LIB_SRCS})
 target_link_libraries(chartshapelib kdchart komain textlayout)
 target_link_libraries(chartshapelib LINK_INTERFACE_LIBRARIES kdchart)
 set_target_properties(chartshapelib PROPERTIES VERSION ${GENERIC_CALLIGRA_LIB_VERSION} SOVERSION ${GENERIC_CALLIGRA_LIB_SOVERSION} )

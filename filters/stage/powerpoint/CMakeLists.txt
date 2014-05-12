@@ -9,9 +9,10 @@ endif("${CMAKE_CXX_COMPILER_ID}" MATCHES "SunPro")
 kde4_add_library(ppttoodplib STATIC PptToOdp.cpp ParsedPresentation.cpp DateTimeFormat.cpp pptstyle.cpp)
 target_link_libraries(ppttoodplib koodf mso ${ZLIB_LIBRARIES})
 
+if(NOT EMSCRIPTEN)
 kde4_add_executable(ppttoodp ppttoodpmain.cpp)
 target_link_libraries(ppttoodp ppttoodplib)
-
+endif(NOT EMSCRIPTEN)
 kde4_add_plugin(powerpointimport PowerPointImport.cpp)
 target_link_libraries(powerpointimport ppttoodplib komain)
 

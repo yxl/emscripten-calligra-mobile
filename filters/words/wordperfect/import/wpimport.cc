@@ -26,7 +26,7 @@
 #include <QByteArray>
 
 K_PLUGIN_FACTORY(WPImportFactory, registerPlugin<WPImport>();)
-K_EXPORT_PLUGIN(WPImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(WPImportFactory("calligrafilters"), WPImportFactory)
 
 #include <libwpd/libwpd.h>
 #ifndef LIBWPD_VERSION_MINOR

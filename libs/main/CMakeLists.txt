@@ -149,7 +149,7 @@ if(Soprano_FOUND)
 endif(Soprano_FOUND)
 
 
-kde4_add_library(komain SHARED ${komain_LIB_SRCS})
+kde4_add_library(komain ${LIBRARY_TYPE} ${komain_LIB_SRCS})
 
 target_link_libraries(komain ${extra_libs}
     ${KDE4_KPARTS_LIBS}

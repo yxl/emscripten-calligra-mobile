@@ -25,7 +25,7 @@
 
 
 K_PLUGIN_FACTORY(PluginFactory, registerPlugin<Plugin>();)
-K_EXPORT_PLUGIN(PluginFactory("VideoShape"))
+K_EXPORT_STATIC_PLUGIN(PluginFactory("VideoShape"), PluginFactory)
 
 Plugin::Plugin(QObject *parent, const QVariantList &)
     : QObject(parent)

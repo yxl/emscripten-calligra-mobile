@@ -28,7 +28,7 @@
 #include <amiproparser.h>
 
 K_PLUGIN_FACTORY(AmiProImportFactory, registerPlugin<AmiProImport>();)
-K_EXPORT_PLUGIN(AmiProImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(AmiProExportFactory("calligrafilters"), AmiProExportFactory)
 
 AmiProImport::AmiProImport(QObject* parent, const QVariantList&):
         KoFilter(parent)

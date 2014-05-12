@@ -30,7 +30,7 @@
 #include <KoUnit.h>
 
 K_PLUGIN_FACTORY(OoImpressExportFactory, registerPlugin<OoImpressExport>();)
-K_EXPORT_PLUGIN(OoImpressExportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(OoImpressExportFactory("calligrafilters"), OoImpressExportFactory)
 
 
 OoImpressExport::OoImpressExport(QObject *parent, const QVariantList &)

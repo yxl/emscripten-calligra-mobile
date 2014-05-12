@@ -50,7 +50,7 @@ set( kopageapp_LIB_SRCS
      dialogs/KoPAConfigureDialog.cpp
 )
 
-kde4_add_library(kopageapp SHARED ${kopageapp_LIB_SRCS})
+kde4_add_library(kopageapp ${LIBRARY_TYPE} ${kopageapp_LIB_SRCS})
 
 target_link_libraries(kopageapp komain textlayout)
 target_link_libraries(kopageapp LINK_INTERFACE_LIBRARIES komain)

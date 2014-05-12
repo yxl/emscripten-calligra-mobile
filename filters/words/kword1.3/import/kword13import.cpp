@@ -37,7 +37,7 @@
 #include "kword13import.h"
 
 K_PLUGIN_FACTORY(Words13ImportFactory, registerPlugin<Words13Import>();)
-K_EXPORT_PLUGIN(Words13ImportFactory("calligrafilters"))
+K_EXPORT_STATIC_GITPLUGIN(Words13ImportFactory("calligrafilters"), Words13ImportFactory)
 
 
 Words13Import::Words13Import(QObject* parent, const QVariantList &)

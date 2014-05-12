@@ -136,7 +136,10 @@
 #include "Util.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
+
+#ifdef EMSCRIPTEN
 #include "PrintJob.h"
+#endif
 
 // commands
 #include "commands/CopyCommand.h"
@@ -2161,11 +2164,15 @@ void View::handleDamages(const QList<Damage*>& damages)
 
 KoPrintJob * View::createPrintJob()
 {
+#ifdef EMSCRIPTEN
+    return 0;
+#else
     if (!activeSheet())
         return 0;
     // About to print; close the editor.
     selection()->emitCloseEditor(true); // save changes
     return new PrintJob(this);
+#endif
 }
 
 #include "View.moc"

@@ -40,7 +40,7 @@
 
 
 K_PLUGIN_FACTORY(LATEXExportFactory, registerPlugin<LATEXExport>();)
-K_EXPORT_PLUGIN(LATEXExportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(LATEXExportFactory("calligrafilters"), LATEXExportFactory)
 
 
 LATEXExport::LATEXExport(QObject* parent, const QVariantList&)

@@ -47,7 +47,7 @@
 #include <QString>
 
 K_PLUGIN_FACTORY(SvgExportFactory, registerPlugin<SvgExport>();)
-K_EXPORT_PLUGIN(SvgExportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(SvgExportFactory("calligrafilters"), SvgExportFactory)
 
 SvgExport::SvgExport(QObject*parent, const QVariantList&)
     : KoFilter(parent)

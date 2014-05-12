@@ -48,7 +48,7 @@
 #include "conversion.h"
 
 K_PLUGIN_FACTORY(OoWriterImportFactory, registerPlugin<OoWriterImport>();)
-K_EXPORT_PLUGIN(OoWriterImportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(OoWriterImportFactory("calligrafilters"), OoWriterImportFactory)
 
 OoWriterImport::OoWriterImport(QObject* parent, const QVariantList &)
         : KoFilter(parent),

@@ -59,7 +59,11 @@
 #include "KPrCustomSlideShows.h"
 #include "ui/KPrConfigureSlideShowDialog.h"
 #include "ui/KPrConfigurePresenterViewDialog.h"
+
+#ifndef EMSCRIPTEN
 #include "ui/KPrHtmlExportDialog.h"
+#endif
+
 #include <QDesktopWidget>
 
 #include "KPrPdfPrintJob.h"
@@ -433,6 +437,7 @@ void KPrView::configurePresenterView()
 
 void KPrView::exportToHtml()
 {
+#ifndef EMSCRIPTEN
     KPrHtmlExportDialog *dialog = new KPrHtmlExportDialog(kopaDocument()->pages(),koDocument()->documentInfo()->aboutInfo("title"),
                                                           koDocument()->documentInfo()->authorInfo("creator"), this);
     if (dialog->exec() == QDialog::Accepted && !dialog->checkedSlides().isEmpty()) {
@@ -446,6 +451,7 @@ void KPrView::exportToHtml()
                                                            dialog->title(), dialog->slidesNames(), dialog->openBrowser()));
         }
    }
+#endif
 }
 
 KoPrintJob *KPrView::createPdfPrintJob()

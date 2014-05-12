@@ -51,7 +51,7 @@
 #include "ManifestParser.h"
 
 K_PLUGIN_FACTORY(HTMLOdfExportFactory, registerPlugin<HTMLOdfExport>();)
-K_EXPORT_PLUGIN(HTMLOdfExportFactory("calligrafilters"))
+K_EXPORT_STATIC_PLUGIN(HTMLOdfExportFactory("calligrafilters"), HTMLOdfExportFactory)
 
 
 HTMLOdfExport::HTMLOdfExport(QObject* parent, const QVariantList&) :
