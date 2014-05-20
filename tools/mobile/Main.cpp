@@ -42,14 +42,14 @@ int main(int argc, char *argv[])
         }
     }
 
-    HildonApplication a(argc, argv);
+    HildonApplication* a = new HildonApplication(argc, argv);
 
     // check if we are running in meego-handset, and if so set 'meegotouch' as the widget style
     if (qgetenv("X_DESKTOP_SESSION") == "X-MEEGO-HS") {
         QApplication::setStyle("meegotouch");
     }
 
-    QStringList arguments = a.arguments();
+    QStringList arguments = a->arguments();
     // remove graphicssystem attribute from the attribute list
     if (graphicsSystemIndex != -1) {
         arguments.removeAt(graphicsSystemIndex);
@@ -65,13 +65,13 @@ int main(int argc, char *argv[])
     if (arguments.size() > 1)
         s->show();
 
-    a.processEvents();
+    a->processEvents();
     MainWindow w(s);
 
-    DBusAdaptor adaptor(&a);
-    QObject::connect(&a, SIGNAL(openDocument(const QString &)),
+    DBusAdaptor adaptor(a);
+    QObject::connect(a, SIGNAL(openDocument(const QString &)),
                      w.controller(), SLOT(openDocument(const QString &)));
-    QObject::connect(&a, SIGNAL(showApplicationMenu()),
+    QObject::connect(a, SIGNAL(showApplicationMenu()),
                      w.controller(), SLOT(showApplicationMenu()));
 
     if (arguments.size() > 1) {
@@ -87,5 +87,5 @@ int main(int argc, char *argv[])
     if (loadScrollAndQuit) {
         QTimer::singleShot(10, w.controller(), SLOT(loadScrollAndQuit()));
     }
-    return a.exec();
+    return a->exec();
 }
