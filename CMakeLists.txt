@@ -40,7 +40,7 @@ set(QT_DBUSCPP2XML_EXECUTABLE ${KDE4_INSTALL}/bin/qdbuscpp2xml)
 set(GENERIC_CALLIGRA_LIB_VERSION "9.0.0")
 set(GENERIC_CALLIGRA_LIB_SOVERSION "9")
 
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules")
 
 #
 # WARNING: don't change the SHOULD_BUILD_app if an application
@@ -194,8 +194,8 @@ macro_ensure_out_of_source_build("Compiling Calligra inside the source directory
 ###########################
 
 find_package(Perl REQUIRED)
-find_package(ZLIB REQUIRED)
-find_package(PNG REQUIRED)
+#find_package(ZLIB REQUIRED)
+#find_package(PNG REQUIRED)
 find_package(Boost REQUIRED) # for pigment and stage
 if (NOT Boost_FOUND)
     MESSAGE(FATAL_ERROR "Did not find Boost. Boost is required for the core libraries, stage, sheets and krita.")
