@@ -32,7 +32,7 @@
 #include <scan.moc>
 
 K_PLUGIN_FACTORY(ScanFactory, registerPlugin<Scan>();)
-K_EXPORT_PLUGIN(ScanFactory("kscan_plugin"))
+K_EXPORT_STATIC_PLUGIN(ScanFactory("kscan_plugin"), ScanFactory)
 
 Scan::Scan(QObject *parent, const QVariantList &)
     : KParts::Plugin(parent), scanDialog( 0 )

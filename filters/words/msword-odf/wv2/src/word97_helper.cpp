@@ -34,6 +34,10 @@
 
 #include "wvlog.h"
 
+#ifdef EMSCRIPTEN
+#include <cstdlib>
+#endif
+
 namespace wvWare
 {
 
@@ -730,7 +734,11 @@ namespace
         {
             m_center = readS16( ptr + index * sizeof( S16 ) );
             // A negative value doesn't make sense here, right? Hmmm
+            #ifdef EMSCRIPTEN
+            m_plusMinus = abs( readS16( ptr + itbdDelMax * sizeof( S16 ) + index * sizeof( S16 ) ) );
+            #else
             m_plusMinus = std::abs( readS16( ptr + itbdDelMax * sizeof( S16 ) + index * sizeof( S16 ) ) );
+            #endif
         }
 
         bool contains( S16 position ) const { return m_center - m_plusMinus <= position && m_center + m_plusMinus >= position; }

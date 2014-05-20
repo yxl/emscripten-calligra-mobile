@@ -24,7 +24,7 @@
 #define KOPAGEFORMAT_H
 
 #include "koodf_export.h"
-
+#undef GrayScale
 #include <QPrinter>
 
 /// The page formats calligra supports

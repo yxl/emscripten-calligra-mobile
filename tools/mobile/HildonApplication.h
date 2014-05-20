@@ -26,6 +26,7 @@
 #define HILDONAPPLICATION_H
 
 #include <QApplication>
+#include <X11/Xlib.h>
 
 /*!
  * \brief Class inherited from QApplication, to handle and display

@@ -1,6 +1,11 @@
 #add_subdirectory( tests )
 
-include_directories( ${KOABSTRACTION_INCLUDES})
+include_directories( ${KOABSTRACTION_INCLUDES}
+    ${KDE4_INCLUDE_DIR}
+    ${KDE4_INCLUDE_DIR}/QtGui
+    ${KDE4_INCLUDE_DIR}/QtCore
+    ${KDE4_INCLUDE_DIR}/QtXml
+    ${KDE4_INCLUDE_DIR}/KDE)
 
 ########### next target ###############
 

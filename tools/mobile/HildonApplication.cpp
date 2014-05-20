@@ -24,7 +24,6 @@
 
 #include "HildonApplication.h"
 #include <QX11Info>
-#include <X11/Xlib.h>
 
 HildonApplication::HildonApplication(int& argc, char** argv)
         : QApplication(argc, argv)
