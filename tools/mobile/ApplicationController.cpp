@@ -150,7 +150,7 @@ bool ApplicationController::m_enableScrolling = false;
 bool ApplicationController::m_stopAcceleratorScrolling = true;
 #endif
 
-ApplicationController::ApplicationController(Splash *aSplash, MainWindow *mainWindow)
+ApplicationController::ApplicationController(MainWindow *mainWindow)
         : KoAbstractApplicationController(mainWindow),
         m_mainWindow(mainWindow),
         m_slideNotesIcon(VIEW_NOTES_PIXMAP),
@@ -230,7 +230,6 @@ ApplicationController::ApplicationController(Splash *aSplash, MainWindow *mainWi
     m_notesDialog = 0;
     m_virtualKeyBoard = 0;
 
-    setSplashScreen(aSplash);
     m_ui->setupUi(m_mainWindow);
 
     m_shortcutForVirtualKeyBoard = new QShortcut(QKeySequence(("Ctrl+K")), m_mainWindow);

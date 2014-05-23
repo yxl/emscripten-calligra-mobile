@@ -33,7 +33,6 @@
 #include <KoPAView.h>
 
 #include "OfficeInterface.h"
-#include "Splash.h"
 #include "PreviewDialog.h"
 #include "NotesDialog.h"
 #include "SlidingMotionDialog.h"
@@ -89,7 +88,7 @@ class ApplicationController : public KoAbstractApplicationController
     Q_OBJECT
 
 public:
-    ApplicationController(Splash *aSplash, MainWindow *mainWindow);
+    ApplicationController(MainWindow *mainWindow);
     ~ApplicationController();
 
     /*!

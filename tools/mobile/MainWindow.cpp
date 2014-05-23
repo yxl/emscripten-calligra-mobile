@@ -121,9 +121,9 @@
 #include <sheets/part/View.h>
 #include <sheets/Sheet.h>
 
-MainWindow::MainWindow(Splash *aSplash, QWidget *parent)
+MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent),
-          KoAbstractApplicationWindow((m_controller = new ApplicationController(aSplash, this)))
+          KoAbstractApplicationWindow((m_controller = new ApplicationController(this)))
 {
 }
 

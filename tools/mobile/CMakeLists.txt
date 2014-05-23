@@ -40,7 +40,6 @@ set(CalligraMobileMocSrc_SRCS
     ZoomDialog.h 
     HildonMenu.h 
     HildonApplication.h 
-    Splash.h 
     NotifyDialog.h 
     PresentationTool.h 
     AboutDialog.h 
@@ -83,7 +82,6 @@ set(CalligraMobile_SRCS
     ZoomDialog.cpp 
     HildonMenu.cpp 
     HildonApplication.cpp 
-    Splash.cpp 
     NotifyDialog.cpp 
     PresentationTool.cpp 
     AboutDialog.cpp 

@@ -23,7 +23,6 @@
  */
 
 //#include "MainWindow.h"
-#include "Splash.h"
 //#include <QtCore/QtCore>
 #include <KApplication>
 #include <KAboutData>

@@ -91,10 +91,6 @@ const QString FS_PPT_BACK_BUTTON_PATH(":/images/48x48/general_back.png");
 const QString FS_PPT_FORWARD_BUTTON_PATH(":/images/48x48/general_forward.png");
 
 /*!
-* Path for splash screen Calligra logo
-*/
-const QString SPLASH_LOGO_CALLIGRA_PATH(":/images/178x200/calligramobile.png");
-/*!
  * * Calligra pixmap in about dialog
  */
 const QString ABOUT_DIALOG_CALLIGRA_PIXMAP("/usr/share/icons/hicolor/64x64/apps/calligramobile.png");

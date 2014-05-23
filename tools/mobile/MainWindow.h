@@ -31,7 +31,6 @@
 #include <KoAbstractApplicationWindow.h>
 
 class ApplicationController;
-class Splash;
 
 /*!
  * \brief Main window of the application. KoCanvasControllerWidget is set as
@@ -42,7 +41,7 @@ class MainWindow : public QMainWindow, public KoAbstractApplicationWindow
     Q_OBJECT
 
 public:
-    MainWindow(Splash *aSplash, QWidget *parent = 0);
+    MainWindow(QWidget *parent = 0);
     ~MainWindow();
     //void tabletEvent ( QTabletEvent * event );
     void mousePressEvent(QMouseEvent *event);
