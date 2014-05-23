@@ -22,31 +22,10 @@
  *
  */
 
-//#include "MainWindow.h"
-//#include <QtCore/QtCore>
-#include <KApplication>
-#include <KAboutData>
-#include <KCmdLineArgs>
-#include <KLocale>
-//#include "HildonApplication.h"
+#include "MainWindow.h"
+#include <QtCore/QtCore>
+#include "HildonApplication.h"
 //#include <KoAbstractApplicationController.h>
-
-#include <KXmlGuiWindow>
-#include <KTextEdit>
-
-class MyMainWindow : public KXmlGuiWindow
-{
-  public:
-    MyMainWindow(QWidget *parent=0) : KXmlGuiWindow(parent)
-    {
-	textArea = new KTextEdit();
-	setCentralWidget(textArea);
-	setupGUI();
-    }
- 
-  private:
-    KTextEdit* textArea;
-};
 
 int main(int argc, char *argv[])
 {
@@ -62,7 +41,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    QApplication* a = new QApplication(argc, argv);
+    HildonApplication* a = new HildonApplication(argc, argv);
 
     // check if we are running in meego-handset, and if so set 'meegotouch' as the widget style
     if (qgetenv("X_DESKTOP_SESSION") == "X-MEEGO-HS") {
@@ -80,12 +59,9 @@ int main(int argc, char *argv[])
         arguments.removeAll("-loadScrollAndQuit");
     }
 
-    MyMainWindow* my = new MyMainWindow();
-    my->show();
+    MainWindow* w = new MainWindow();
+    w->show();
 /*
-    a->processEvents();
-    MainWindow w(s);
-
     QObject::connect(a, SIGNAL(openDocument(const QString &)),
                      w.controller(), SLOT(openDocument(const QString &)));
     QObject::connect(a, SIGNAL(showApplicationMenu()),
