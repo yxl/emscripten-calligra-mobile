@@ -74,7 +74,6 @@ KoApplication::KoApplication()
     KoGlobal::initialize();
 
     new KoApplicationAdaptor(this);
-    QDBusConnection::sessionBus().registerObject("/application", this);
 
     m_starting = true;
 #ifdef Q_WS_WIN

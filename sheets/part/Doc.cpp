@@ -150,8 +150,6 @@ Doc::Doc(QWidget *parentWidget, QObject* parent, bool singleViewMode)
 {
     connect(d->map, SIGNAL(sheetAdded(Sheet*)), this, SLOT(sheetAdded(Sheet*)));
     new MapAdaptor(d->map);
-    QDBusConnection::sessionBus().registerObject('/' + objectName() + '/' + d->map->objectName(), d->map);
-
 
     // Init chart shape factory with KSpread's specific configuration panels.
     KoShapeFactoryBase *chartShape = KoShapeRegistry::instance()->value(ChartShapeId);

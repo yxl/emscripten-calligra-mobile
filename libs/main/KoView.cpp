@@ -156,7 +156,6 @@ KoView::KoView(KoDocument *document, QWidget *parent)
     setObjectName(newObjectName());
 
     new KoViewAdaptor(this);
-    QDBusConnection::sessionBus().registerObject('/' + objectName(), this);
 
     //kDebug(30003) <<"KoView::KoView" << this;
     d->document = document;

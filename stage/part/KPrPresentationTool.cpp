@@ -58,8 +58,6 @@ KPrPresentationTool::KPrPresentationTool( KPrViewModePresentation &viewMode )
 , m_strategy( new KPrPresentationStrategy( this ) )
 , m_bus ( new KPrPresentationToolAdaptor( this ) )
 {
-    QDBusConnection::sessionBus().registerObject("/kpresenter/PresentationTools", this);
-
     // tool box
     m_frame = new QFrame( m_viewMode.canvas()->canvasWidget() );
 

@@ -22,11 +22,15 @@
  *
  */
 
-#include "MainWindow.h"
+//#include "MainWindow.h"
 #include "Splash.h"
-#include <QtCore/QtCore>
-#include "HildonApplication.h"
-#include <KoAbstractApplicationController.h>
+//#include <QtCore/QtCore>
+#include <KApplication>
+#include <KAboutData>
+#include <KCmdLineArgs>
+#include <KLocale>
+//#include "HildonApplication.h"
+//#include <KoAbstractApplicationController.h>
 
 #include <KXmlGuiWindow>
 #include <KTextEdit>
@@ -59,7 +63,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    HildonApplication* a = new HildonApplication(argc, argv);
+    QApplication* a = new QApplication(argc, argv);
 
     // check if we are running in meego-handset, and if so set 'meegotouch' as the widget style
     if (qgetenv("X_DESKTOP_SESSION") == "X-MEEGO-HS") {
@@ -77,15 +81,9 @@ int main(int argc, char *argv[])
         arguments.removeAll("-loadScrollAndQuit");
     }
 
-    Splash *s = new Splash();
-    s->move(QPoint(311,122));
-    if (arguments.size() > 1)
-        s->show();
-
-
     MyMainWindow* my = new MyMainWindow();
     my->show();
-
+/*
     a->processEvents();
     MainWindow w(s);
 
@@ -105,5 +103,6 @@ int main(int argc, char *argv[])
     if (loadScrollAndQuit) {
         QTimer::singleShot(10, w.controller(), SLOT(loadScrollAndQuit()));
     }
+*/
     return a->exec();
 }
