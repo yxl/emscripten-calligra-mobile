@@ -28,18 +28,12 @@
 #include <QObject>
 #include <QtDebug>
 #include <QTimer>
-#include <QtDBus>
 #include <QVBoxLayout>
 #include <QBitArray>
 #include <QPushButton>
 #include <QLabel>
 #include <QSpinBox>
 #include <QRadioButton>
-
-#ifdef Q_WS_MAEMO_5
-#include <mce/dbus-names.h>
-#endif
-
 
 class AcceleratorScrollSlide:public QObject
 {
@@ -75,12 +69,6 @@ private:
     int  stateFixValueY;
     int verticalScrollValue;
     int horizontalScrollValue;
-#ifdef Q_WS_MAEMO_5
-
-    QDBusInterface *interfaceForAcceleratorScrolling;
-
-#endif
-
 
     QDialog *scrollSettingsDialog;
     QVBoxLayout *scrollLayout;
@@ -95,12 +83,6 @@ private:
     QBitArray slidingAttributes;
     int  countSteppedInRange;
     int vibrationValueLevel;
-
-#ifdef Q_WS_MAEMO_5
-
-    QDBusInterface *interfaceForAcceleratorSliding;
-
-#endif
 
     QDialog *vibrationDialog;
     QVBoxLayout *vibrationLayout;

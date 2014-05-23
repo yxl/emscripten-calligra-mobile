@@ -26,7 +26,6 @@
 #define GLPRESENTER_H
 
 #include "GlWidget.h"
-#include <QDBusInterface>
 
 namespace Ui
 {
@@ -79,7 +78,6 @@ private :
      * a watcher for time line
      */
     int c_time;
-    QDBusInterface *interface;
     QList <QPixmap> pixm;
     QTimeLine * timeline;
     bool set, done, forward, reverse, paused;

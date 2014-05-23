@@ -28,12 +28,10 @@
 
 #include "MainWindow.h"
 #include "KoCanvasControllerWidget.h"
-#include "PresentationToolAdaptor.h"
 
 #include <QPoint>
 
 class MainWindow;
-class PresentationToolAdaptor;
 
 class PresentationTool : public QObject
 {
@@ -91,8 +89,6 @@ private :
      */
     QPoint lastPoint;
     QPoint endPoint;
-
-    PresentationToolAdaptor *m_dbus;
 
     /*!
      * Draw a line to a particular point

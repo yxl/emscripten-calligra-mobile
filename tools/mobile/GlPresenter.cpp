@@ -24,11 +24,6 @@
 #include "GlPresenter.h"
 #include <math.h>
 
-#ifdef Q_WS_MAEMO_5
-#include <mce/dbus-names.h>
-#endif
-
-#include <QDBusMessage>
 #include <QDebug>
 
 GLPresenter::GLPresenter(QWidget *parent, int stl, int st, QList <QPixmap> p)
@@ -73,11 +68,6 @@ GLPresenter::~GLPresenter()
 
 void GLPresenter::keepDisplayOn()
 {
-#ifdef Q_WS_MAEMO_5
-    interface = new QDBusInterface(MCE_SERVICE, MCE_REQUEST_PATH, MCE_REQUEST_IF, QDBusConnection::systemBus(), this);
-    Q_CHECK_PTR(interface);
-    QDBusMessage reply = interface->call(MCE_PREVENT_BLANK_REQ);
-#endif
 }
 void GLPresenter::showpaused()
 {

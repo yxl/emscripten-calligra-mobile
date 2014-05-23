@@ -326,7 +326,6 @@ bool DigitalSignatureDialog::verifySignature()
 void DigitalSignatureDialog::sendMail()
 {
     this->accept();
-    QProcess::startDetached("dbus-send --print-reply --type=method_call --dest=com.nokia.modest /com/nokia/modest com.nokia.modest.MailTo string:mailto:"+this->emailButton->text());
 }
 
 void DigitalSignatureDialog::showSignerInformation()

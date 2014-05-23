@@ -125,14 +125,4 @@ const QString NEW_SPREADSHEET("/usr/share/calligramobile-templates/.templates/Ne
 const QString FS_BUTTON_STYLE_SHEET("background-color: black; \
                                      border: none; \
                                      border-radius: 5px;");
-/*!
- * DBus FreOffice Path
- */
-const QString FREOFFICE_PATH("/com/nokia/CalligraMobile");
-
-/*!
- * DBus FreOffice ServiceName
- */
-const QString FREOFFICE_SERVICE_NAME("com.nokia.CalligraMobile");
-
 #endif // COMMON_H

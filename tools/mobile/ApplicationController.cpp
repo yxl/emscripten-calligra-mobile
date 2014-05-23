@@ -35,7 +35,6 @@
 #include "NotifyDialog.h"
 #include "AboutDialog.h"
 #include "PresentationTool.h"
-#include "MainWindowAdaptor.h"
 #include "FoExternalEditor.h"
 #include "FoImageSelectionWidget.h"
 #ifdef HAVE_OPENGL
@@ -211,7 +210,6 @@ ApplicationController::ApplicationController(Splash *aSplash, MainWindow *mainWi
     m_fsPPTForwardButton = 0;
     m_fsPPTDrawPenButton = 0;
     m_fsPPTDrawHighlightButton = 0;
-    m_dbus = new MainWindowAdaptor(this);
     m_panningCount = 0;
     m_pressed = false;
     m_digitalSignatureDialog = 0;
@@ -235,7 +233,6 @@ ApplicationController::ApplicationController(Splash *aSplash, MainWindow *mainWi
     setSplashScreen(aSplash);
     m_ui->setupUi(m_mainWindow);
 
-    QDBusConnection::sessionBus().registerObject("/presentation/view", m_mainWindow);
     m_shortcutForVirtualKeyBoard = new QShortcut(QKeySequence(("Ctrl+K")), m_mainWindow);
     Q_CHECK_PTR(m_shortcutForVirtualKeyBoard);
     m_shortcutForVirtualKeyBoard->setEnabled(true);
@@ -2779,13 +2776,6 @@ void ApplicationController::showApplicationMenu()
 {
     HildonMenu menu(m_mainWindow);
     menu.exec();
-}
-
-//Function to check if application has been started by DBus
-void ApplicationController::checkDBusActivation()
-{
-    if (splash() && !m_mainWindow->isActiveWindow())
-        openDocument();
 }
 
 void ApplicationController::pluginOpen(bool /*newWindow*/, const QString& path)

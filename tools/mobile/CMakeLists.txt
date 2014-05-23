@@ -7,7 +7,6 @@ find_package(KDE4 4.3.0 REQUIRED)
 include(KDE4Defaults)
 
 find_package(Qt4 4.5.0 REQUIRED)
-SET(QT_USE_QTDBUS 1)
 SET(QT_USE_QTNETWORK TRUE)
 SET(QT_USE_QTMAEMO5 TRUE)
 SET(QT_USE_QTXML TRUE)
@@ -43,7 +42,6 @@ set(CalligraMobileMocSrc_SRCS
     HildonApplication.h 
     Splash.h 
     NotifyDialog.h 
-    DBusAdaptor.h 
     PresentationTool.h 
     AboutDialog.h 
     CollabDialog.h 
@@ -51,8 +49,6 @@ set(CalligraMobileMocSrc_SRCS
     CollabServer.h 
     CollabClient.h  
     PreviewDialog.h 
-    MainWindowAdaptor.h 
-    PresentationToolAdaptor.h 
     NotesDialog.h 
     PreviewButton.h 
     SlidingMotionDialog.h 
@@ -90,7 +86,6 @@ set(CalligraMobile_SRCS
     Splash.cpp 
     NotifyDialog.cpp 
     PresentationTool.cpp 
-    DBusAdaptor.cpp 
     AboutDialog.cpp 
     CollabDialog.cpp
     Collaborate.cpp 
@@ -98,8 +93,6 @@ set(CalligraMobile_SRCS
     CollabClient.cpp 
     FlowLayout.cpp 
     PreviewDialog.cpp 
-    MainWindowAdaptor.cpp 
-    PresentationToolAdaptor.cpp 
     NotesDialog.cpp
     PreviewButton.cpp 
     SlidingMotionDialog.cpp 
@@ -131,7 +124,6 @@ target_link_libraries(calligramobile
     ${LIBXML2_LIBRARIES}
     ${OPENSSL_LIBRARIES}
     ${X11_X11_LIB}
-    ${QT_LIBRARIES}
     ${QT_QTSQL_LIBRARY}
     ${QT_QTNETWORK_LIBRARIES}
     koabstraction
@@ -159,7 +151,6 @@ install(TARGETS calligramobile RUNTIME DESTINATION bin)
 install(FILES calligramobile.desktop DESTINATION share/applications/hildon)
 install(FILES images/178x200/calligramobile.png DESTINATION share/icons/hicolor/178x200/apps)
 install(FILES images/64x64/calligramobile.png DESTINATION share/icons/hicolor/64x64/apps)
-install(FILES com.nokia.CalligraMobile.service DESTINATION share/dbus-1/services)
 install(FILES images/48x48/Document.png DESTINATION share/icons/hicolor/48x48/hildon)
 install(FILES images/48x48/Presenter.png DESTINATION share/icons/hicolor/48x48/hildon)
 install(FILES images/48x48/SpreadSheet.png DESTINATION share/icons/hicolor/48x48/hildon)

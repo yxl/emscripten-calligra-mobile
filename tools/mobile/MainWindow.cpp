@@ -32,8 +32,6 @@
 #include "HildonMenu.h"
 #include "NotifyDialog.h"
 #include "AboutDialog.h"
-#include "PresentationTool.h"
-#include "MainWindowAdaptor.h"
 #include "FoExternalEditor.h"
 #include "FoImageSelectionWidget.h"
 #ifdef HAVE_OPENGL

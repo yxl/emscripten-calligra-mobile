@@ -71,7 +71,6 @@ class GLPresenter;
 class KUndo2Stack;
 class KoTextEditor;
 class PresentationTool;
-class MainWindowAdaptor;
 class KoCanvasControllerWidget;
 class KoShape;
 class KoPAPageBase;
@@ -407,11 +406,6 @@ private slots:
      * Slot to choose new document
      */
     void chooseDocumentType();
-    /*!
-     * Slot to check DBus activation, If document is not opened
-     * then open filedialog
-     */
-    void checkDBusActivation();
     /*!
      * Slot to test scrolling of a loaded document and quitting afterwards.
      * This slot checks if a document has been loaded. If so, it calls pagedown and waits
@@ -817,10 +811,6 @@ private:
      * Pointer to highlight draw button
      */
     QPushButton *m_fsPPTDrawHighlightButton;
-    /*!
-     *Pointer to the MainWindowAdaptor object
-     */
-    MainWindowAdaptor *m_dbus;
 
     ////////////////////////////////////
     // Accelerator scrolling ,sliding //

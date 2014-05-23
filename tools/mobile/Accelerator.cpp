@@ -25,8 +25,6 @@
 #include "Accelerator.h"
 #include "MainWindow.h"
 #include "Common.h"
-#include <QtDBus/QDBusMessage>
-#include <QDBusReply>
 #include <QDialog>
 
 enum  scrollingAttributes  { stateFix,scrollUp,scrollDown,scrollLeft,scrollRight,toggleScrollTransition };
@@ -106,24 +104,6 @@ void AcceleratorScrollSlide::startSlideSettings()
 
 void AcceleratorScrollSlide::startRecognitionSlide()
 {
-
-#ifdef Q_WS_MAEMO_5
-
-    qDebug()<<"Accelerator has begun";
-    interfaceForAcceleratorSliding = new QDBusInterface(MCE_SERVICE,MCE_REQUEST_PATH,
-                                                        MCE_REQUEST_IF, QDBusConnection::systemBus(),
-                                                        this);
-    Q_CHECK_PTR(interfaceForAcceleratorSliding);
-    QDBusMessage replyAccelerator = interfaceForAcceleratorSliding->call(MCE_ACCELEROMETER_ENABLE_REQ);
-    QDBusMessage replyVibrator = interfaceForAcceleratorSliding->call(MCE_ENABLE_VIBRATOR);
-
-    if (replyAccelerator.type() == QDBusMessage::ErrorMessage) {
-        qDebug() << replyAccelerator.errorMessage();
-    }
-    if (replyVibrator.type() == QDBusMessage::ErrorMessage)
-        qDebug() << replyVibrator.errorMessage();
-
-#endif
     vibrationLevelPatterns
             <<VIBRATIONLEVEL1
             <<VIBRATIONLEVEL2
@@ -151,78 +131,6 @@ void AcceleratorScrollSlide::beginSliding()
 {
     if(slidingAttributes.at(toggleSlideTransition))
     {
-
-#ifdef Q_WS_MAEMO_5
-
-        QDBusMessage replyForFindingCordinates=interfaceForAcceleratorSliding->call(MCE_DEVICE_ORIENTATION_GET);
-        int xCordinate=replyForFindingCordinates.arguments().at(3).value<int>();
-
-        //Geometry settings for the SLIDE TRANSITION using the STEERING option
-
-        if(xCordinate>0){
-            slidingAttributes.setBit(previousEnabled,true);                       //bent to left
-            slidingAttributes.setBit(nextEnabled,false);
-        }
-        if(xCordinate<0){
-            xCordinate=xCordinate*(-1);                                            //bent to right
-            slidingAttributes.setBit(previousEnabled,false);
-            slidingAttributes.setBit(nextEnabled,true);
-        }
-        if(xCordinate>LIMITFORENTERINGRANGE){
-            slidingAttributes.setBit(crossedRange,true);                           //device bent into the range
-            countSteppedInRange--;
-            if(countSteppedInRange<4)
-            {
-                slidingAttributes.setBit(crossedRange,false);
-            }
-        }
-        if(xCordinate<LIMITFOREXITINGRANGE){                                       //device exits from the range
-            countSteppedInRange=5;
-        }
-        if(slidingAttributes.at(crossedRange))
-        {
-
-            slidingAttributes.setBit(crossedRange,false);
-
-
-            QDBusMessage replyForVibratorController;
-            if(slidingAttributes.at(nextEnabled)){
-                if(slidingAttributes.at(vibrationIsSet))
-                {
-                    qDebug()<<"vibration is set vibrating";
-                    replyForVibratorController =interfaceForAcceleratorSliding->call(MCE_ACTIVATE_VIBRATOR_PATTERN,vibrationLevelPatterns.at(vibrationValueLevel-1));
-                    if (replyForVibratorController.type() == QDBusMessage::ErrorMessage) {
-                        qDebug() << replyForVibratorController.errorMessage();
-                    }
-                }
-                qDebug()<<"signal next is emitted ";
-                emit next();
-
-            }
-
-            if(slidingAttributes.at(previousEnabled)) {
-                if(slidingAttributes.at(vibrationIsSet))
-                {
-                    replyForVibratorController =interfaceForAcceleratorSliding->call(MCE_ACTIVATE_VIBRATOR_PATTERN,vibrationLevelPatterns.at(vibrationValueLevel-1));
-                    if (replyForVibratorController.type() == QDBusMessage::ErrorMessage) {
-                        qDebug() << replyForVibratorController.errorMessage();
-                    }
-                }
-                qDebug()<<"signal previous is emitted ";
-                emit previous();
-
-            }
-
-            slidingAttributes.setBit(nextEnabled,false);
-            slidingAttributes.setBit(previousEnabled,false);
-        }
-
-
-        QDBusMessage replyForTheBlanking =interfaceForAcceleratorSliding->call(MCE_PREVENT_BLANK_REQ);
-        if (replyForTheBlanking.type() == QDBusMessage::ErrorMessage) {
-            qDebug() << replyForTheBlanking.errorMessage();
-        }
-#endif
     }
 }
 
@@ -273,24 +181,6 @@ void AcceleratorScrollSlide::stopRecognition()
 
     slidingAttributes.setBit(toggleSlideTransition,false);
     slidingAttributes.setBit(vibrationIsSet,false);
-#ifdef Q_WS_MAEMO_5
-
-    QDBusMessage replyAccelerometer;
-    replyAccelerometer =  interfaceForAcceleratorSliding->call(MCE_ACCELEROMETER_DISABLE_REQ);
-    if (replyAccelerometer.type() == QDBusMessage::ErrorMessage) {
-        qDebug() <<replyAccelerometer.errorMessage();
-    }
-    qDebug()<<"distroyed accelerator sliding";
-
-    QDBusMessage replyVibrator;
-    replyVibrator =  interfaceForAcceleratorSliding->call(MCE_DISABLE_VIBRATOR);
-    if (replyVibrator.type() == QDBusMessage::ErrorMessage) {
-        qDebug() <<replyVibrator.errorMessage();
-    }
-
-    delete interfaceForAcceleratorSliding;
-    interfaceForAcceleratorSliding=0;
-#endif
 }
 
 
@@ -381,22 +271,6 @@ void AcceleratorScrollSlide::startRecognitionScroll()
     verticalScrollValue=0;
     horizontalScrollValue=0;
 
-#ifdef Q_WS_MAEMO_5
-
-    interfaceForAcceleratorScrolling =new QDBusInterface(MCE_SERVICE, MCE_REQUEST_PATH,
-                                                         MCE_REQUEST_IF, QDBusConnection::systemBus(),
-                                                         this);
-    Q_CHECK_PTR(interfaceForAcceleratorScrolling);
-
-    QDBusMessage replyAccelerometer =interfaceForAcceleratorScrolling->call(MCE_ACCELEROMETER_ENABLE_REQ);
-    if (replyAccelerometer.type() == QDBusMessage::ErrorMessage)
-        qDebug() << replyAccelerometer.errorMessage();
-
-    QDBusMessage replyVibrator =interfaceForAcceleratorScrolling->call(MCE_ENABLE_VIBRATOR);
-    if (replyVibrator.type() == QDBusMessage::ErrorMessage)
-        qDebug() << replyVibrator.errorMessage();
-#endif
-
     QTimer *timerAcceleratorScrolling=new QTimer(this);
     Q_CHECK_PTR(timerAcceleratorScrolling);
     QObject::connect(timerAcceleratorScrolling, SIGNAL(timeout()),this,SLOT(beginScrolling()));
@@ -407,144 +281,6 @@ void AcceleratorScrollSlide::startRecognitionScroll()
 
 void AcceleratorScrollSlide::beginScrolling()
 {
-#ifdef Q_WS_MAEMO_5
-
-    if (scrollingAttributes.at(toggleScrollTransition)) {
-
-        verticalScrollValue=0;
-        horizontalScrollValue=0;
-
-
-        QDBusMessage replyToGetCoOrdinates=interfaceForAcceleratorScrolling->call(MCE_DEVICE_ORIENTATION_GET);
-        int xCordinate=replyToGetCoOrdinates.arguments().at(3).value<int>();
-        int yCordinate=replyToGetCoOrdinates.arguments().at(4).value<int>();
-
-        // Initial positions of the device are fixed
-        // stateFix =Reading position
-
-        if (scrollingAttributes.at(stateFix)) {
-            scrollingAttributes.setBit(stateFix,false);
-            stateFixValueX=xCordinate;
-            stateFixValueY=yCordinate;
-        }
-
-        xCordinate=xCordinate-stateFixValueX;
-        yCordinate=yCordinate-stateFixValueY;
-
-        if (yCordinate<0) {
-            yCordinate=yCordinate*(-1);
-            scrollingAttributes.setBit(scrollUp,true);
-            scrollingAttributes.setBit(scrollDown,false);
-        }
-        else {
-            scrollingAttributes.setBit(scrollUp,false);
-            scrollingAttributes.setBit(scrollDown,true);
-        }
-
-        if (xCordinate<0) {
-            xCordinate=xCordinate*(-1);
-            scrollingAttributes.setBit(scrollLeft,true);
-            scrollingAttributes.setBit(scrollRight,false);
-        }
-        else {
-            scrollingAttributes.setBit(scrollLeft,false);
-            scrollingAttributes.setBit(scrollRight,true);
-        }
-
-        //    levels for the scorlling in both the horizontal
-        //     and the vertical directions simultaneously
-
-
-        //for the case of the vertical scrolling
-
-        if (yCordinate>YCORDINATELIMITLEVEL1) {
-            if(scrollingAttributes.at(scrollUp)) {
-                verticalScrollValue+=3;
-            }                                                        //very slow movement
-            if(scrollingAttributes.at(scrollDown)) {                 //level1
-                verticalScrollValue-=3;
-            }
-        }
-        if (yCordinate>YCORDINATELIMITLEVEL2) {
-            if(scrollingAttributes.at(scrollUp)) {
-                verticalScrollValue+=6;
-            }                                                        //level2
-            if(scrollingAttributes.at(scrollDown)) {
-                verticalScrollValue-=6;
-            }
-
-        }
-        if (yCordinate>YCORDINATELIMITLEVEL3) {
-            if(scrollingAttributes.at(scrollUp)) {
-                verticalScrollValue+=10;
-            }                                                        //level3
-            if(scrollingAttributes.at(scrollDown)) {
-                verticalScrollValue-=10;
-            }
-
-        }
-
-        if (yCordinate>YCORDINATELIMITLEVEL4) {
-            if(scrollingAttributes.at(scrollUp)) {
-                verticalScrollValue+=15;
-            }                                                        //level4
-            if(scrollingAttributes.at(scrollDown)) {
-                verticalScrollValue-=15;
-            }
-        }
-
-        //for the case of the horizontal scrolling
-
-        if (xCordinate>XCORDINATELIMITLEVEL1) {
-            if(scrollingAttributes.at(scrollLeft)) {
-                horizontalScrollValue+=3;                                   //very slow movement
-            }                                                   //level 1
-            if(scrollingAttributes.at(scrollRight)) {
-                horizontalScrollValue-=3;
-            }
-        }
-        if (xCordinate>XCORDINATELIMITLEVEL2) {
-            if(scrollingAttributes.at(scrollLeft)) {
-                horizontalScrollValue+=5;                                   //bending to level 2
-            }                                                   //speed increased +5
-            if(scrollingAttributes.at(scrollRight)) {
-                horizontalScrollValue-=5;
-            }
-        }
-        if (xCordinate>XCORDINATELIMITLEVEL1) {
-            if(scrollingAttributes.at(scrollLeft)) {
-                horizontalScrollValue+=10;                                   //bending to level 3
-            }                                                    //speed increased +15
-            if(scrollingAttributes.at(scrollRight)) {
-                horizontalScrollValue-=10;
-            }
-
-        }
-
-        if (xCordinate>XCORDINATELIMITLEVEL4) {
-            if(scrollingAttributes.at(scrollLeft)) {
-                horizontalScrollValue+=10;                                //bending to level 4
-            }                                                 //speed increased +25
-            if(scrollingAttributes.at(scrollRight)) {                                      //maximum speed
-                horizontalScrollValue-=10;
-            }
-
-        }
-
-    }
-
-
-    //Change continually told to the main program";
-    emit change();
-
-
-    //During the scrolling screen is never blanked out";
-
-    QDBusMessage replyBlanking = interfaceForAcceleratorScrolling->call(MCE_PREVENT_BLANK_REQ);
-    if (replyBlanking.type() == QDBusMessage::ErrorMessage) {
-        qDebug()<<replyBlanking.errorMessage();
-    }
-#endif
 }
 
 int AcceleratorScrollSlide::getHorizontalScrollValue()
@@ -564,24 +300,6 @@ void AcceleratorScrollSlide::resetScrollValues()
 
 void AcceleratorScrollSlide::stopRecognitionScroll()
 {
-#ifdef Q_WS_MAEMO_5
-    scrollingAttributes.setBit(toggleScrollTransition,false);
-    verticalScrollValue=0;
-    horizontalScrollValue=0;
-
-    QDBusMessage replyAccelerometer;
-    replyAccelerometer =  interfaceForAcceleratorScrolling->call(MCE_ACCELEROMETER_DISABLE_REQ);
-    if (replyAccelerometer.type() == QDBusMessage::ErrorMessage) {
-        qDebug() <<replyAccelerometer.errorMessage();
-    }
-    //distroyed accelerator scrolling
-
-    QDBusMessage replyVibrator;
-    replyVibrator =  interfaceForAcceleratorScrolling->call(MCE_DISABLE_VIBRATOR);
-    if (replyVibrator.type() == QDBusMessage::ErrorMessage) {
-        qDebug() <<replyAccelerometer.errorMessage();
-    }
-#endif
     //distroyed vibrator scrolling
 }
 

@@ -24,9 +24,26 @@
 
 #include "MainWindow.h"
 #include "Splash.h"
-#include "DBusAdaptor.h"
+#include <QtCore/QtCore>
 #include "HildonApplication.h"
 #include <KoAbstractApplicationController.h>
+
+#include <KXmlGuiWindow>
+#include <KTextEdit>
+
+class MyMainWindow : public KXmlGuiWindow
+{
+  public:
+    MyMainWindow(QWidget *parent=0) : KXmlGuiWindow(parent)
+    {
+	textArea = new KTextEdit();
+	setCentralWidget(textArea);
+	setupGUI();
+    }
+ 
+  private:
+    KTextEdit* textArea;
+};
 
 int main(int argc, char *argv[])
 {
@@ -65,10 +82,13 @@ int main(int argc, char *argv[])
     if (arguments.size() > 1)
         s->show();
 
+
+    MyMainWindow* my = new MyMainWindow();
+    my->show();
+
     a->processEvents();
     MainWindow w(s);
 
-    DBusAdaptor adaptor(a);
     QObject::connect(a, SIGNAL(openDocument(const QString &)),
                      w.controller(), SLOT(openDocument(const QString &)));
     QObject::connect(a, SIGNAL(showApplicationMenu()),
@@ -81,8 +101,6 @@ int main(int argc, char *argv[])
             openArgs.openAsTemplates = arguments[2].compare("false", Qt::CaseInsensitive);
         }
         w.controller()->openDocuments(openArgs);
-    } else {
-        QTimer::singleShot(5, w.controller(), SLOT(checkDBusActivation()));
     }
     if (loadScrollAndQuit) {
         QTimer::singleShot(10, w.controller(), SLOT(loadScrollAndQuit()));

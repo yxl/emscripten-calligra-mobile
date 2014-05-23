@@ -27,7 +27,6 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QPen>
-#include <QDBusConnection>
 
 #include <KoView.h>
 
@@ -39,10 +38,8 @@ PresentationTool::PresentationTool(MainWindow * window, KoCanvasControllerWidget
     m_window(window),
     m_penToolActivated(false),
     m_highlightToolActivated(false),
-    scribbling(false),
-    m_dbus( new PresentationToolAdaptor( this ) )
+    scribbling(false)
 {
-    QDBusConnection::sessionBus().registerObject("/presentation/tool", this);
     lastPoint.setX(0);
     lastPoint.setY(0);
 }

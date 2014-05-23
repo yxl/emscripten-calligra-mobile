@@ -40,9 +40,6 @@
 #include <KoPAPageBase.h>
 #include <KoPAView.h>
 #include <QProgressDialog>
-#include <QDBusConnection>
-#include <QDBusInterface>
-#include <QDBusReply>
 
 #include "FlowLayout.h"
 #include "PreviewDialog.h"
