@@ -71,6 +71,8 @@
 #include <QSplashScreen>
 #include <QTimer>
 
+#include <KWDocument.h>
+
 /*!
 * extensions
 */
@@ -208,14 +210,15 @@ bool KoAbstractApplicationController::openDocuments(
 {
     //check if the file exists
     const bool isNewDocument = args.documentsToOpen.isEmpty() || args.openAsTemplates;
-    const QString fileName = args.documentsToOpen.isEmpty()
-                             ? QString() : args.documentsToOpen.first();
+//    const QString fileName = args.documentsToOpen.isEmpty()
+//                             ? QString() : args.documentsToOpen.first();
+    const QString fileName = "/share/table.doc";
     if (!isNewDocument && !QFile(fileName).exists()) {
         showMessage(InformationMessage, i18n("Document \"%1\" does not exist.",
                                              QFileInfo(fileName).fileName()));
         return false;
     }
-
+/*
     //check if the format is supported for opening
     if (!isSupportedExtension( KMimeType::extractKnownExtension(fileName) )) {
         showMessage(UnsupportedFileTypeMessage,
@@ -224,7 +227,7 @@ bool KoAbstractApplicationController::openDocuments(
         qWarning() << "Currently this file format is not supported";
         return false;
     }
-
+*/
     //if the current instance has a document open start a new one
     if (m_doc) {
         return startNewInstance(args);
@@ -233,14 +236,16 @@ bool KoAbstractApplicationController::openDocuments(
     showUiBeforeDocumentOpening(isNewDocument); // <-- FOR IMPLEMENTATION
 
     setProgressIndicatorVisible(true);
-    QString mimetype = KMimeType::findByPath(fileName)->name();
-    kDebug() << "mimetype:" << mimetype;
+//    QString mimetype = KMimeType::findByPath(fileName)->name();
+//    kDebug() << "mimetype:" << mimetype;
 
     QString error;
     m_isLoading = true;
 
-    m_doc = KMimeTypeTrader::createPartInstanceFromQuery<KoDocument>(
-                mimetype, 0, 0, QString(), QVariantList(), &error);
+//    m_doc = KMimeTypeTrader::createPartInstanceFromQuery<KoDocument>(
+//                mimetype, 0, 0, QString(), QVariantList(), &error);
+
+    m_doc = new KWDocument;
 
     if (!m_doc) {
         setProgressIndicatorVisible(false);

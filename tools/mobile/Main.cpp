@@ -25,7 +25,7 @@
 #include "MainWindow.h"
 #include <QtCore/QtCore>
 #include "HildonApplication.h"
-//#include <KoAbstractApplicationController.h>
+#include <KoAbstractApplicationController.h>
 
 int main(int argc, char *argv[])
 {
@@ -61,11 +61,11 @@ int main(int argc, char *argv[])
 
     MainWindow* w = new MainWindow();
     w->show();
-/*
+
     QObject::connect(a, SIGNAL(openDocument(const QString &)),
-                     w.controller(), SLOT(openDocument(const QString &)));
+                     w->controller(), SLOT(openDocument(const QString &)));
     QObject::connect(a, SIGNAL(showApplicationMenu()),
-                     w.controller(), SLOT(showApplicationMenu()));
+                     w->controller(), SLOT(showApplicationMenu()));
 
     if (arguments.size() > 1) {
         KoAbstractApplicationOpenDocumentArguments openArgs;
@@ -73,11 +73,11 @@ int main(int argc, char *argv[])
         if (arguments.size() > 2) {
             openArgs.openAsTemplates = arguments[2].compare("false", Qt::CaseInsensitive);
         }
-        w.controller()->openDocuments(openArgs);
+        w->controller()->openDocuments(openArgs);
     }
     if (loadScrollAndQuit) {
-        QTimer::singleShot(10, w.controller(), SLOT(loadScrollAndQuit()));
+        QTimer::singleShot(10, w->controller(), SLOT(loadScrollAndQuit()));
     }
-*/
+
     return a->exec();
 }

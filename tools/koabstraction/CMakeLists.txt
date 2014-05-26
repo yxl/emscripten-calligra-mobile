@@ -2,6 +2,7 @@
 
 include_directories( ${KOABSTRACTION_INCLUDES}
     ${KDE4_INCLUDE_DIR}
+    ${CMAKE_SOURCE_DIR}/words/part
     ${KDE4_INCLUDE_DIR}/QtGui
     ${KDE4_INCLUDE_DIR}/QtCore
     ${KDE4_INCLUDE_DIR}/QtXml
